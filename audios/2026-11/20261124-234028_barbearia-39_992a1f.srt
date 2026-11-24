@@ -1,0 +1,67 @@
+1
+00:00:00,095 --> 00:00:01,575
+A Navalha de Ouro vazia.
+
+2
+00:00:01,659 --> 00:00:02,545
+Do outro lado,
+
+3
+00:00:02,545 --> 00:00:04,389
+a barbearia concorrente lotada.
+
+4
+00:00:04,477 --> 00:00:06,480
+Ele pesquisa barbearia perto de mim:
+
+5
+00:00:06,568 --> 00:00:08,000
+o concorrente aparece primeiro,
+
+6
+00:00:08,000 --> 00:00:09,911
+nota alta, muitas avaliações.
+
+7
+00:00:10,000 --> 00:00:11,489
+O Google recomenda quem é bem
+
+8
+00:00:11,489 --> 00:00:12,241
+avaliado.
+
+9
+00:00:12,330 --> 00:00:14,355
+Então ele conhece a placa NFC.
+
+10
+00:00:14,443 --> 00:00:15,898
+O cliente encosta o celular e
+
+11
+00:00:15,898 --> 00:00:17,377
+cai direto na avaliação.
+
+12
+00:00:17,466 --> 00:00:18,752
+Num toque, só isso.
+
+13
+00:00:18,841 --> 00:00:20,091
+As avaliações sobem,
+
+14
+00:00:20,091 --> 00:00:21,750
+a barbearia aparece no topo e
+
+15
+00:00:21,750 --> 00:00:22,605
+enche de novo.
+
+16
+00:00:22,693 --> 00:00:23,491
+Quer a sua?
+
+17
+00:00:23,580 --> 00:00:25,332
+Chama a nfcbrazil no direct.
