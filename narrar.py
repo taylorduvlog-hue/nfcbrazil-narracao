@@ -484,11 +484,16 @@ async def principal(args):
 
     duracao = duracao_audio(mp3)
     srt.write_text(montar_srt(palavras, duracao), encoding="utf-8")
+    arq_palavras = pasta / f"{base}.palavras.json"
+    arq_palavras.write_text(json.dumps(
+        [{"palavra": p.get("texto_leg", p["texto"]), "inicio": round(p["inicio"], 3), "fim": round(p["fim"], 3)}
+         for p in palavras], ensure_ascii=False, indent=0), encoding="utf-8")
     log.info("ok | %s | %s | %.2fs | %s palavras | trocas=%s", mp3.name, chave, duracao, len(palavras), len(trocas))
     return {
         "status": "ok",
         "audio": str(mp3),
         "legenda": str(srt),
+        "palavras_json": str(arq_palavras),
         "duracao": duracao,
         "narrador": chave,
         "reserva_usada": bool(trocas),
