@@ -1,0 +1,5 @@
+saida/
+logs/
+__pycache__/
+resultado_local.json
+resposta.json
