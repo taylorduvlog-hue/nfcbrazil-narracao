@@ -27,6 +27,22 @@ O script responde com uma linha de JSON:
 ```
 Se der erro: `{"status":"erro","erro":"..."}` e código de saída 1.
 
+## Narradores e troca automática
+A ordem vai da melhor voz para a pior. Se um narrador falhar, o script passa sozinho para o próximo, e o texto inteiro sai sempre com a mesma voz:
+1. Edge, com a voz escolhida (Francisca por padrão)
+2. Edge, com as outras vozes (Thalita e Antonio)
+3. Piper, a voz offline `pt_BR-faber-medium`, que funciona mesmo se a Microsoft bloquear o Edge
+4. Google (gTTS)
+
+Um narrador que falhou 2 vezes seguidas nas últimas 12 h fica **em observação**: recebe só 1 tentativa rápida, em vez de 3. Ele volta ao normal assim que funcionar de novo. O histórico fica em `estado_narradores.json`.
+
+O JSON de resposta diz qual narrador foi usado (`narrador`), se a reserva entrou (`reserva_usada`, `trocas`) e se a legenda está `exata` (Edge) ou `estimada` (Piper e Google). Para escolher a ordem você mesmo: `--narradores edge:antonio,piper,gtts`.
+
+Para testar a troca, simule uma falha:
+```powershell
+$env:NARRAR_SIMULAR_FALHA = "edge"; python narrar.py --texto "teste" ; Remove-Item Env:NARRAR_SIMULAR_FALHA
+```
+
 O script limpa o texto antes de narrar: remove emojis, links e #hashtags, transforma quebras de linha em pausas e corrige as aspas. Textos longos são divididos em partes e juntados num único MP3. Se a conexão falhar, ele tenta de novo até 3 vezes.
 
 ## Juntar narração e vídeo (ffmpeg)

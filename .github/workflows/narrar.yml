@@ -55,8 +55,16 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.txt
 
-      - name: Instalar edge-tts
-        run: pip install -r requirements.txt
+      - name: Instalar narradores (Edge, Piper, Google)
+        run: |
+          pip install -r requirements.txt
+          command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+
+      - name: Voz offline do Piper (guardada em cache)
+        uses: actions/cache@v4
+        with:
+          path: vozes_piper
+          key: piper-pt_BR-faber-medium
 
       - name: Gerar narracao
         id: narrar
@@ -75,14 +83,17 @@ jobs:
           echo "codigo=$?" >> "$GITHUB_OUTPUT"
           cat resultado_local.json
 
+      # Salva o audio e o estado dos narradores (quem anda falhando), mesmo se tudo falhar
       - name: Salvar audio no repositorio
-        if: steps.narrar.outputs.codigo == '0'
+        if: always()
         env:
           PEDIDO: ${{ inputs.pedido }}
         run: |
           git config user.name "nfcbrazil-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add audios
+          [ -d audios ] && git add audios
+          [ -f estado_narradores.json ] && git add estado_narradores.json
+          git diff --cached --quiet && exit 0
           git commit -m "narracao: $PEDIDO"
           for i in 1 2 3; do
             git pull --rebase -q && git push -q && break

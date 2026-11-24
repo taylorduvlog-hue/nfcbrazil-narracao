@@ -1,5 +1,7 @@
 saida/
 logs/
 __pycache__/
+vozes_piper/
+*.wav
 resultado_local.json
 resposta.json
